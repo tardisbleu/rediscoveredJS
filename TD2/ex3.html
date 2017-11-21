@@ -14,9 +14,9 @@
                         complete: function () {
                             var value = $("#texte").val();
                             if(isPrime(value)){
-                                $("#conteneur").html(value+" est un nombre premier.");
+                                $("#conteneur").html("<span style='color:green;'>"+ value+" est un nombre premier.</span>");
                             }else{
-                                $("#conteneur").html(value+" n'est pas un nombre premier.");
+                                $("#conteneur").html("<span style='color:red;'>"+ value+" n'est pas un nombre premier.</span>");
                             } 
                         }
                     });

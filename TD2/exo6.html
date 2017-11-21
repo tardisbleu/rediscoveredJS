@@ -57,6 +57,7 @@
                     url: "https://cors.io/?https://www.metaweather.com/api/location/" + idVille,
                     dataType: 'json',
                     type: 'GET',
+					async: false,
                     success: function (meteo) {
                         var laMeteoParJour = meteo['consolidated_weather'];
                         var tab_jour = new Array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");

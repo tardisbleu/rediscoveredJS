@@ -9,10 +9,20 @@
 
     <script src="jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
+	function isUrlValid(userInput) {
+    var res = userInput.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+    if(res == null)
+        return false;
+    else
+        return true;
+}
         function generateHTML() {
             var type = $("#type").val();
             var contenu = $("#contenu").val();
             var htmlInject = "";
+			if((type == "a" || type == "img") && !isUrlValid(contenu)){
+				htmlInject = "Erreur de lien";
+			}else{
             switch (type) {
                 case 'h1':
                     htmlInject = "<h1>" + contenu + "</h1>";
@@ -30,7 +40,7 @@
                     htmlInject = "<img src='" + contenu + "'/>";
                     break;
                 case 'a':
-                    htmlInject = "<a href='#'>" + contenu + "</a>";
+                    htmlInject = "<a href='"+ contenu +"'>" + contenu + "</a>";
                     break;
                 case 'input:text':
                     htmlInject = "<input type='text' placeholder='" + contenu + "'/>";
@@ -44,7 +54,8 @@
                 default:
                     Console.log("Erreur de type");
                     break;
-            }
+            }	
+			}
             return htmlInject;
         }
         first = false;
@@ -86,7 +97,7 @@
                 <option value="h3">Titre (h3)</option>
                 <option value="p">Paragraphe (p)</option>
                 <option value="img">Image (img)</option>
-                <option value="a">Lien (a))</option>
+                <option value="a">Lien (a)</option>
                 <option value="input:text">Champ de texte (input:text)</option>
                 <option value="input:submit">Bouton (input:submit)</option>
                 <option value="label">Label (label)</option>
@@ -115,15 +126,19 @@
     <!-- Style -->
     <style>
         #boxCode{
-            float: right;
-            border: 1px solid #C1C2CC;
+            position:fixed;
+			bottom:0px;
+            border-top: 1px solid #C1C2CC;
             padding: 15px;
-            border-radius: 3px;
             background: #F1F1F1;
+			height: 20%;
+			width:100vw;
+			overflow:auto;
         }
         body{
             font-family: 'Quicksand', sans-serif;
             background-color: #FCFCFC;
+			margin:0;
         }
 
         #generateur{
@@ -132,6 +147,8 @@
             padding: 15px;
             border-radius: 3px;
             background: #F1F1F1;
+			min-height: 175px;
+			min-width:200px;
         }
 
         #generateur label{ font-weight: bold;}

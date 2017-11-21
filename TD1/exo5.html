@@ -18,11 +18,15 @@
     		var nombreDeA = $("a").length;
                 var nombreDeP = $("p.paragraphe").length;
                 var nombreDeI = $("input:text").length;
-                var nombreDeU = $("ul:has()").length;
-                console.log(nombreDeA);
-                console.log(nombreDeP);
-                console.log(nombreDeI);
-                console.log(nombreDeU);
+				var nombreDeU = 0;
+				$("ul").each(function (index, value) { 
+					if($(this).children().length > 2)
+						nombreDeU ++;
+				});
+                console.log("Nombre de a: "+ nombreDeA);
+                console.log("Nombre de p avec comme class .paragraphe: "+nombreDeP);
+                console.log("Nombre de input text: "+nombreDeI);
+                console.log("Nombre de ul avec plus de 2 enfants: "+nombreDeU);
     	});
    	</script>
 </head>
