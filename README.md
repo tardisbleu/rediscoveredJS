@@ -6,4 +6,4 @@
 
 TD 3 : Exercice bonus : autocomplétion (TAB)
 
-Créer par rémy torres pour le cours de pierre biasutt (Licence por dawin)
+Créer par rémy torres pour le cours de pierre biasutt (Licence pro dawin)
