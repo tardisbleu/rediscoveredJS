@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="jquery-3.2.1.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#form").submit(function () {
+                    $("#conteneur ul").html(" ");
+                    var type = $('#info :selected').val();
+                    var texte = $('#texte').val();
+                    if (type == 1)
+                        var data = 'nom=' + texte;
+                    if (type == 2)
+                        var data = 'codePostal=' + texte;
+                    if (type == 3)
+                        var data = 'codeDepartement=' + texte;
+
+                    $.ajax({
+                        url: 'https://geo.api.gouv.fr/communes',
+                        data: data,
+                        dataType: 'json',
+                        type: 'GET',
+                        success: function (ville, textStatus, jqXHR) {
+                            for (var i = 0; i < ville.length; i++) {
+                                $("#conteneur ul").append('<li>' + ville[i]['nom'] + '</li>');
+                            }
+                        }
+                    });
+                    return false;
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <form id="form">
+            <select id="info">
+                <option value="1">Nom</option>
+                <option value="2">CP</option>
+                <option value="3">Code département</option>
+            </select>
+            <input type="text" id="texte"/>
+            <input type="submit" value="OK" id="ok">
+        </form>
+        <div id="conteneur">
+            <ul>
+
+            </ul>
+        </div>
+    </body>
+</html>

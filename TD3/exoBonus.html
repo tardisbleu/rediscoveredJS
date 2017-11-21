@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Page html exo</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="./jqueryui/external/jquery/jquery.js" charset="utf-8"></script>
+    <script src="./jqueryui/jquery-ui.js" charset="utf-8"></script>
+    <style>
+    body{
+        margin:0;
+    }
+#rightContent{
+    border-left: 2px solid grey;
+    min-width: calc(20% - 2px);
+    min-height: 100vh;
+    background: whitesmoke;
+    float: right;
+}
+#leftContent{
+    min-width: 80%;
+    float: left;
+}
+
+#auto{
+    padding-left: 1%;
+    margin: 0;
+    border: none;
+    border-bottom: 2px solid grey;
+    height: 6vh;
+    min-width: 100%;
+}
+    </style>
+</head>
+<body>
+    <div id="leftContent">
+        <input type="text" name="auto" id="auto" placeholder="Saisir le nom d'un pokemon "><br/>
+    </div>
+        <div id="rightContent"><h3>Liste de pokemon : </h3><span> Nombre de correspondance trouvé : <b id="number">0</b></span><ul id="liste"></ul></div>
+    <script>
+    (function($){
+        jQuery.fn.autoComp = function(data){
+            this.each(function(){
+                $(this).bind('keyup', function(event){
+                    if(event.which === 9){
+                        var value = $(this).val().toLowerCase();
+                        var nombreDeCorrespondance = 0;
+                        $("#liste").html(" ");
+                        $.each(data, function(key, val){
+                            val = val.toLowerCase();
+                            if(val.startsWith(value)){
+                                nombreDeCorrespondance++;
+                                $("#liste").append("<li> "+val+"</li>");
+                                valueToPut = val;
+                            }
+                        });
+                        $("#number").html(nombreDeCorrespondance);
+                        if(nombreDeCorrespondance == 1)
+                        $(this).val(valueToPut);
+                    }
+                    return false;
+                });
+            });
+            return this;
+        };
+    })(jQuery);
+
+    function getData(myUrl) {
+        return JSON.parse($.ajax({
+            url: myUrl,
+            async: false
+        }).responseText);
+    }
+    var link = "https://raw.githubusercontent.com/fanzeyi/Pokemon-DB/master/pokedex.json";
+    var data = getData(link);
+    var tab = [];
+    $.each(data, function(key, val){
+        tab.push(val.ename);
+    });
+    console.log(tab);
+    $("#auto").autoComp(tab);
+</script>
+</body>
+</html>

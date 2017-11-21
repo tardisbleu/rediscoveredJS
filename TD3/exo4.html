@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <meta charset="utf-8">
+  <title>Exo 4</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js">
+</script>
+<body>
+  <div ng-app="allo" ng-controller="CalculatorController">
+    <input type="text" name="number1" id="number1" ng-model="number1">
+    <select name="operateur" id="operateur" ng-model="operateur">
+      <option value="+" selected="selected">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+    </select>
+    <input type="text" name="number2" id="number2" ng-model="number2">
+
+    <br/>
+    <div>{{ number1 }} {{ operateur }} {{ number2 }} = {{ result() }}</div>
+  </div>
+  <script>
+  angular.module('allo', [])
+  .controller('CalculatorController', function($scope) {
+      $scope.result = function() {
+          if ($scope.operateur == '+') {
+              return parseInt($scope.number1) + parseInt($scope.number2);
+          }
+          if ($scope.operateur == '-') {
+              return $scope.number1 - $scope.number2;
+          }
+          if ($scope.operateur == '*') {
+              return $scope.number1 * $scope.number2;
+          }
+          if ($scope.operateur == '/') {
+              return $scope.number1 / $scope.number2;
+          }
+      };
+  });
+  </script>
+</body>
+</html>

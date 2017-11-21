@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="jquery-3.2.1.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#C1").click(function () {
+                    $('#conteneur').html("Chargement...");
+                    $('#conteneur').load('http://www.labri.fr/perso/pbiasutt/KDJS/TD02/exo1.php #conteneur1');
+                });
+                $("#C2").click(function () {
+                    $('#conteneur').html("Chargement...");
+                    $('#conteneur').load('http://www.labri.fr/perso/pbiasutt/KDJS/TD02/exo1.php #conteneur2');
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div>
+            <input type="button" value="1er contenu" id="C1"/>
+            <input type="button" value="2eme contenu" id="C2"/>
+        </div>
+        <div id="conteneur"></div>
+    </body>
+</html>

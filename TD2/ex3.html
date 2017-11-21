@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="jquery-3.2.1.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#form").submit(function (e) {
+                    $.ajax({
+                        url: 'http://www.labri.fr/perso/pbiasutt/KDJS/TD02/functions.php',
+                        dataType: 'script',
+                        complete: function () {
+                            var value = $("#texte").val();
+                            if(isPrime(value)){
+                                $("#conteneur").html(value+" est un nombre premier.");
+                            }else{
+                                $("#conteneur").html(value+" n'est pas un nombre premier.");
+                            } 
+                        }
+                    });
+                    return false;
+                });
+                
+            });
+        </script>
+    </head>
+    <body>
+        <form name="form" method="POST" id="form">
+            TEXTE : <input type="text" id="texte"/>
+            <input type="submit" id="button" value="OK"/>
+
+        </form>
+        <div id="conteneur"></div>
+    </body>
+</html>

@@ -1,0 +1,65 @@
+<!-- KIT DE SURVIE JS - IUT INFORMATIQUE BORDEAUX -->
+<!DOCTYPE html>
+<head>
+ 
+    <meta charset="utf-8" />
+ 
+    <title>Exercice 14</title>
+    <meta name="description" content="Description de la page">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
+    <style>
+    	body{ font-family: 'Quicksand', sans-serif; }
+	</style>
+
+    <script src="jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+            var Utilisateur = {
+                nom: "",
+                prenom: "",
+                age: "",
+                sexe: "",
+                texte: "",
+                init: function (nom, prenom, age, sexe,texte) {
+                    this.nom= nom;
+                    this.prenom= prenom;
+                    this.age = age;
+                    this.sexe = sexe;
+                    this.texte = texte;
+                },
+                decrire: function () {
+                    var sexe = (this.sexe == 'f')?"Femme":"Homme";
+                    console.log("Nom : "+this.nom+" / Prénom : "+this.prenom+" / Age :"+this.age+" / Sexe : "+sexe+" / Texte : "+this.texte);
+                },
+            };
+            
+            $("input:submit").click(function(){
+    		var nom = $("#nom").val();
+    		var prenom = $("#prenom").val();
+    		var age = $("#age").val();
+    		var sexe = $("#sexe").val();
+    		var texte = $("#textarea").val();
+                var utilisateur = Object.create(Utilisateur);
+                utilisateur.init(nom, prenom, age,sexe,texte);
+                utilisateur.decrire();
+            })
+    	});
+   	</script>
+</head>
+<body>
+    <div id="form">
+        <label>Nom : <input type="text" name="nom" id="nom" placeholder="Nom"/></label><br/>
+        <label>Prénom : <input type="text" name="prenom" id="prenom" placeholder="Prénom"/></label><br/>
+        <label>Age : <input type="number" name="age" id="age" placeholder="Age" max="99"/></label><br/>
+        <select name="sexe" id="sexe">
+            <option value="h">Homme</option>
+            <option value="f">Femme</option>
+        </select><br/>
+        <label>Sexe : <textarea name="textarea" id="textarea" placeholder="Saisr votre texte"> </textarea></label><br/>
+        <input type="submit" value="Envoyer" /><br/>
+            
+    </div>
+</body>
+ 
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Page html exo</title>
+  <script src="./jqueryui/external/jquery/jquery.js" charset="utf-8"></script>
+  <script src="./jqueryui/jquery-ui.js" charset="utf-8"></script>
+  <style>
+  .borderblack{
+    border:1px solid black;
+    width: 100px;
+    height: 100px;
+  }
+  .fondrouge{
+    background: red;
+    width: 100px;
+    height: 100px;
+  }
+  #posX,#posY{
+    color:white;
+  }
+  </style>
+</head>
+<body>
+  <div class="borderblack">
+
+  </div>
+  <div class="fondrouge ui-widget-content">
+    <span id="posX"></span><br/>
+    <span id="posY"></span>
+  </div>
+  <ul id="sortable">
+    <li class="ui-state-default" ordre="1">Item 1</li>
+    <li class="ui-state-default" ordre="2">Item 2</li>
+    <li class="ui-state-default" ordre="3">Item 3</li>
+    <li class="ui-state-default" ordre="4">Item 4</li>
+    <li class="ui-state-default" ordre="5">Item 5</li>
+    <li class="ui-state-default" ordre="6">Item 6</li>
+    <li class="ui-state-default" ordre="7">Item 7</li>
+  </ul>
+  <button id="ordre">Ordre de la liste ?</button>
+  <script>
+  $( function() {
+    $( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+  } );
+  $( function() {
+    $( ".fondrouge" ).draggable(
+      {
+        drag: function(){
+          var offset = $(this).offset();
+          var xPos = offset.left;
+          var yPos = offset.top;
+          $('#posX').text('x: ' + xPos);
+          $('#posY').text('y: ' + yPos);
+        }}
+      );
+    });
+    $("#ordre").click(function(){
+      var ordre = "";
+      $("#sortable li").each(function(index){
+        ordre += " / "+$(this).attr("ordre");
+      });
+      alert(ordre);
+    });
+  </script>
+</body>
+</html>

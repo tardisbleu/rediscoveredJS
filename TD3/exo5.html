@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <meta charset="utf-8">
+  <title>Exo 4</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js">
+</script>
+<body>
+  <div ng-app="allo" ng-controller="controller">
+    <ul>
+      <li ng-repeat="p in list"> {{ p.ename }}</li>
+    </ul>
+  </div>
+  <script>
+  angular.module('allo', [])
+  .controller('controller', function($scope,$http) {
+    $scope.list = [];
+    $http.get("https://raw.githubusercontent.com/fanzeyi/Pokemon-DB/master/pokedex.json").then(function(response){
+      angular.forEach(response.data,function(p){
+        $scope.list.push(p);
+      })
+    });
+  });
+  </script>
+</body>
+</html>
